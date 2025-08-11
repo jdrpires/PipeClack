@@ -8,10 +8,12 @@ services:
       POSTGRES_PASSWORD: clack
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./api/db/init:/docker-entrypoint-initdb.d
     ports:
       - '5432:5432'
   api:
     build: ./api
+    command: ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
     environment:
       DB_URL: postgresql+psycopg2://clack:clack@db:5432/clack
       JWT_SECRET: change-me

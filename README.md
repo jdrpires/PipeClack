@@ -6,6 +6,12 @@ Monorepo with FastAPI backend and React frontend.
 
 Requirements: Docker and Docker Compose.
 
+To bring up the full stack with the database migrated and seeded, run:
+
+```
+docker-compose up --build
+```
+
 ```
 make dev       # build and run containers
 make migrate   # run alembic migrations
