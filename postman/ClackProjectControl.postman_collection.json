@@ -1,0 +1,74 @@
+{
+ "info": {
+  "name": "Clack Project Control",
+  "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+ },
+ "item": [
+  {
+   "name": "Login",
+   "request": {
+    "method": "POST",
+    "header": [],
+    "url": {
+     "raw": "http://localhost:8000/auth/login",
+     "protocol": "http",
+     "host": ["localhost"],
+     "port": "8000",
+     "path": ["auth","login"]
+    },
+    "body": {
+     "mode": "raw",
+     "raw": "{\"email\":\"admin@clack.com\",\"password\":\"Admin@123\"}"
+    }
+   }
+  },
+  {
+   "name": "Refresh",
+   "request": {
+    "method": "POST",
+    "header": [],
+    "url": {
+     "raw": "http://localhost:8000/auth/refresh",
+     "protocol": "http",
+     "host": ["localhost"],
+     "port": "8000",
+     "path": ["auth","refresh"]
+    }
+   }
+  },
+  {
+   "name": "Create Project",
+   "request": {
+    "method": "POST",
+    "url": {
+     "raw": "http://localhost:8000/projects/",
+     "protocol": "http",
+     "host": ["localhost"],
+     "port": "8000",
+     "path": ["projects"]
+    },
+    "body": {
+     "mode": "raw",
+     "raw": "{\"name\":\"Proj\"}"
+    }
+   }
+  },
+  {
+   "name": "Discovery Flow",
+   "item": [
+    {
+     "name": "Get Template",
+     "request": {"method":"GET","url":"http://localhost:8000/projects/discovery/template"}
+    },
+    {
+     "name": "Save Response",
+     "request": {"method":"POST","url":"http://localhost:8000/projects/1/discovery","body":{"mode":"raw","raw":"{}"}}
+    },
+    {
+     "name": "Complete",
+     "request": {"method":"POST","url":"http://localhost:8000/projects/1/discovery/complete"}
+    }
+   ]
+  }
+ ]
+}
