@@ -16,7 +16,7 @@ services:
     environment:
       DB_URL: postgresql+psycopg2://clack:clack@db:5432/clack
       JWT_SECRET: change-me
-      CORS_ORIGINS: http://localhost:5173
+      CORS_ORIGINS: '["http://localhost:5173"]'
       UPLOAD_DIR: /app/uploads
     volumes:
       - ./api:/app
@@ -29,7 +29,7 @@ services:
     environment:
       DB_URL: postgresql+psycopg2://clack:clack@db:5432/clack
       JWT_SECRET: change-me
-      CORS_ORIGINS: http://localhost:5173
+      CORS_ORIGINS: '["http://localhost:5173"]'
       UPLOAD_DIR: /app/uploads
     volumes:
       - ./api:/app
