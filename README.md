@@ -12,6 +12,17 @@ To bring up the full stack with the database migrated and seeded, run:
 docker-compose up --build
 ```
 
+This builds and starts every service. During startup, the `api-migrate` service
+executes `alembic upgrade head` so all database migrations are applied before
+the API container begins serving requests.
+
+To apply migrations manually without bringing up the full stack, run:
+
+```
+docker compose run --rm api alembic upgrade head
+```
+This is the same command executed by the `make migrate` shortcut shown below.
+
 ```
 make dev       # build and run containers
 make migrate   # run alembic migrations
