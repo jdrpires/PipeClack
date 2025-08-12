@@ -3,6 +3,7 @@ uvicorn
 sqlalchemy[asyncio]
 alembic
 pydantic
+email-validator
 pydantic-settings
 python-multipart
 passlib[bcrypt]
