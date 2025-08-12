@@ -10,9 +10,22 @@ services:
       - ./api/db/init:/docker-entrypoint-initdb.d
     ports:
       - '5432:5432'
+  api-migrate:
+    build: ./api
+    command: ["alembic", "upgrade", "head"]
+    environment:
+      DB_URL: postgresql+psycopg2://clack:clack@db:5432/clack
+      JWT_SECRET: change-me
+      CORS_ORIGINS: http://localhost:5173
+      UPLOAD_DIR: /app/uploads
+    volumes:
+      - ./api:/app
+      - ./api/uploads:/app/uploads
+    depends_on:
+      - db
   api:
     build: ./api
-    command: ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
     environment:
       DB_URL: postgresql+psycopg2://clack:clack@db:5432/clack
       JWT_SECRET: change-me
@@ -25,6 +38,7 @@ services:
       - '8000:8000'
     depends_on:
       - db
+      - api-migrate
   web:
     build: ./web
     environment:
